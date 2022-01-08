@@ -4,7 +4,8 @@ CREATE TABLE users
     email      varchar(30)                        NOT NULL,
     password   varchar(260)                       NOT NULL,
     phone      varchar(20)                        NOT NULL,
-    name       varchar(30)                        NOT NULL,
+    name       varchar(10)                        NOT NULL,
+    nickname   varchar(30)                        NOT NULL,
     created_at datetime default CURRENT_TIMESTAMP NOT NULL,
     updated_at datetime default CURRENT_TIMESTAMP NOT NULL
 );
