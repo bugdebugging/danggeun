@@ -17,10 +17,9 @@ CREATE TABLE products
     price       bigint                             NOT NULL,
     description varchar(2048)                      NOT NULL,
     status      varchar(20)                        NOT NULL,
-    interest    int      default 0                 NOT NULL,
     created_at  datetime default CURRENT_TIMESTAMP NOT NULL,
     updated_at  datetime default CURRENT_TIMESTAMP NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE replies
@@ -31,20 +30,29 @@ CREATE TABLE replies
     comments   varchar(1024)                      NOT NULL,
     created_at datetime default CURRENT_TIMESTAMP NOT NULL,
     updated_at datetime default CURRENT_TIMESTAMP NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id),
-    FOREIGN KEY (product_id) REFERENCES products(id)
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (product_id) REFERENCES products (id)
+);
+
+CREATE TABLE interest_product_history
+(
+    id         bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id    bigint NOT NULL,
+    product_id bigint NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (product_id) REFERENCES products (id)
 );
 
 CREATE TABLE user_images
 (
     user_id   bigint       NOT NULL,
     image_url varchar(100) NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
 
 CREATE TABLE product_images
 (
     product_id bigint       NOT NULL,
     image_url  varchar(100) NOT NULL,
-    FOREIGN KEY (product_id) REFERENCES products(id)
+    FOREIGN KEY (product_id) REFERENCES products (id)
 );
