@@ -28,7 +28,7 @@ CREATE TABLE replies
     id         bigint                             NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id    bigint                             NOT NULL,
     product_id bigint                             NOT NULL,
-    comments   varchar(1024)                      NOT NULL,
+    comment   varchar(1024)                      NOT NULL,
     created_at datetime default CURRENT_TIMESTAMP NOT NULL,
     updated_at datetime default CURRENT_TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
