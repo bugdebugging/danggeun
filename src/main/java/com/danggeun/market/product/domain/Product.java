@@ -1,5 +1,6 @@
 package com.danggeun.market.product.domain;
 
+import com.danggeun.market.category.domain.Category;
 import com.danggeun.market.user.domain.User;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -19,6 +20,10 @@ public class Product {
     @JoinColumn(name = "user_id")
     @ManyToOne(fetch = FetchType.LAZY)
     private User seller;
+
+    @JoinColumn(name = "category_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Category category;
 
     @Column
     private String name;
@@ -49,8 +54,9 @@ public class Product {
     protected Product() {
     }
 
-    public Product(User seller, String name, Money price, String description, List<ProductImage> productImages) {
+    public Product(User seller, Category category, String name, Money price, String description, List<ProductImage> productImages) {
         this.seller = seller;
+        this.category = category;
         this.name = name;
         this.price = price;
         this.description = description;
@@ -64,6 +70,10 @@ public class Product {
 
     public User getSeller() {
         return seller;
+    }
+
+    public Category getCategory() {
+        return category;
     }
 
     public String getName() {
