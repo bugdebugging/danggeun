@@ -10,17 +10,25 @@ CREATE TABLE users
     updated_at datetime default CURRENT_TIMESTAMP NOT NULL
 );
 
+CREATE TABLE categories
+(
+    id   bigint      NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name varchar(30) NOT NULL
+);
+
 CREATE TABLE products
 (
     id          bigint                             NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id     bigint                             NOT NULL,
+    category_id bigint                             NOT NULL,
     name        varchar(50)                        NOT NULL,
     price       bigint                             NOT NULL,
     description varchar(2048)                      NOT NULL,
     status      varchar(20)                        NOT NULL,
     created_at  datetime default CURRENT_TIMESTAMP NOT NULL,
     updated_at  datetime default CURRENT_TIMESTAMP NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES users (id)
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (category_id) REFERENCES categories (id)
 );
 
 CREATE TABLE replies
@@ -28,7 +36,7 @@ CREATE TABLE replies
     id         bigint                             NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id    bigint                             NOT NULL,
     product_id bigint                             NOT NULL,
-    comment   varchar(1024)                      NOT NULL,
+    comment    varchar(1024)                      NOT NULL,
     created_at datetime default CURRENT_TIMESTAMP NOT NULL,
     updated_at datetime default CURRENT_TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),

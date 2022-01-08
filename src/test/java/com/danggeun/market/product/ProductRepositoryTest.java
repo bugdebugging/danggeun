@@ -1,5 +1,7 @@
 package com.danggeun.market.product;
 
+import com.danggeun.market.category.domain.Category;
+import com.danggeun.market.category.domain.CategoryRepository;
 import com.danggeun.market.product.domain.*;
 import com.danggeun.market.user.domain.User;
 import com.danggeun.market.user.domain.UserRepository;
@@ -22,6 +24,9 @@ public class ProductRepositoryTest {
     @Autowired
     UserRepository userRepository;
 
+    @Autowired
+    CategoryRepository categoryRepository;
+
     @Test
     void Product_저장() {
         final String name = "조던 신발";
@@ -35,7 +40,9 @@ public class ProductRepositoryTest {
         }
 
         User user = userRepository.findById(1L).get();
-        Product product = new Product(user, name, price, description, uploadedProductImages);
+        Category category = categoryRepository.findById(1L).get();
+
+        Product product = new Product(user, category, name, price, description, uploadedProductImages);
         Product savedProduct = productRepository.save(product);
 
         assertNotNull(savedProduct.getId());
