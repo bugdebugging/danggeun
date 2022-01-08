@@ -1,8 +1,11 @@
 package com.danggeun.market.product.domain;
 
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
+@EqualsAndHashCode
 public class Money {
     private Long money;
     private static final Money zero = Money.of(0L);
