@@ -6,6 +6,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -41,15 +42,20 @@ public class Product {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
+    private List<ProductImage> productImages;
+
     protected Product() {
     }
 
-    public Product(User seller, String name, Money price, String description) {
+    public Product(User seller, String name, Money price, String description, List<ProductImage> productImages) {
         this.seller = seller;
         this.name = name;
         this.price = price;
         this.description = description;
         this.status = ProductStatus.SELL;
+        this.productImages = productImages;
     }
 
     public Long getId() {
@@ -82,5 +88,9 @@ public class Product {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public List<ProductImage> getProductImages() {
+        return productImages;
     }
 }
