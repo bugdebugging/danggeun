@@ -23,6 +23,7 @@ public class Product {
     private String name;
 
     @Embedded
+    @AttributeOverride(name = "money", column = @Column(name = "price"))
     private Money price;
 
     @Column
@@ -48,7 +49,7 @@ public class Product {
         this.name = name;
         this.price = price;
         this.description = description;
-        this.status=ProductStatus.SELL;
+        this.status = ProductStatus.SELL;
     }
 
     public Long getId() {

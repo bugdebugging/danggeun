@@ -2,11 +2,13 @@ package com.danggeun.market.product.domain;
 
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable
 @EqualsAndHashCode
 public class Money {
+    @Column(name = "money")
     private Long money;
     private static final Money zero = Money.of(0L);
 
