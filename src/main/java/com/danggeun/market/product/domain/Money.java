@@ -10,7 +10,7 @@ import javax.persistence.Embeddable;
 public class Money {
     @Column(name = "money")
     private Long money;
-    private static final Money zero = Money.of(0L);
+    public static final Money zero = Money.of(0L);
 
     protected Money() {
     }
@@ -22,5 +22,9 @@ public class Money {
 
     public static Money of(Long price) {
         return new Money(price);
+    }
+
+    public Long getMoney() {
+        return money;
     }
 }
