@@ -28,7 +28,7 @@ public class ProductRepositoryImpl implements ProductQueryRepository {
                 .from(product)
                 .where(dynamicLtId)
                 .leftJoin(reply).on(product.id.eq(reply.productId))
-                .leftJoin(interestHistory).on(product.id.eq(interestHistory.id))
+                .leftJoin(interestHistory).on(product.id.eq(interestHistory.product.id))
                 .groupBy(product.id)
                 .orderBy(product.id.desc())
                 .limit(size)
