@@ -4,6 +4,8 @@ values ('myemail@kw.ac.kr', 'sample_pw', '111-1111-111', 'myname', 'mynickname')
 insert into users(email, password, phone, name, nickname)
 values ('youremail@kw.ac.kr', 'sample_pw2', '222-2222-222', 'yourname', 'yournickname');
 
+insert into users(email, password, phone, name, nickname)
+values ('email@company.com', 'pw', '333-3333-333', 'name', 'nickname');
 
 insert into categories(name) values ('디지털기기');
 insert into categories(name) values ('생활가전');
@@ -51,7 +53,11 @@ insert into interest_product_histories(user_id, product_id)
 values (2, 1);
 -- 3 관심
 insert into interest_product_histories(user_id, product_id)
+values (1, 3);
+insert into interest_product_histories(user_id, product_id)
 values (2, 3);
+insert into interest_product_histories(user_id, product_id)
+values (3, 3);
 
 -- 1 이미지
 insert into product_images(product_id, image_url)
