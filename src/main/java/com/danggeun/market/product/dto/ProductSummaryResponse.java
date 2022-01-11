@@ -4,6 +4,7 @@ import com.danggeun.market.product.domain.Product;
 import com.danggeun.market.product.domain.ProductStatus;
 
 public class ProductSummaryResponse {
+    private Long id;
     private String name;
     private Long price;
     private String thumbnailImageUrl;
@@ -12,6 +13,7 @@ public class ProductSummaryResponse {
     private Long countOfInterest;
 
     public ProductSummaryResponse(Product product, Long countOfReply, Long countOfInterest) {
+        this.id = product.getId();
         this.name = product.getName();
         this.price = product.getPrice().getMoney();
         if (product.getThumbnailImages() != null)
@@ -19,6 +21,10 @@ public class ProductSummaryResponse {
         this.status = product.getStatus();
         this.countOfReply = countOfReply;
         this.countOfInterest = countOfInterest;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
