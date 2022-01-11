@@ -3,6 +3,7 @@ package com.danggeun.market.product;
 import com.danggeun.market.category.domain.Category;
 import com.danggeun.market.category.domain.CategoryRepository;
 import com.danggeun.market.product.domain.*;
+import com.danggeun.market.product.dto.ProductSummaryResponse;
 import com.danggeun.market.user.domain.User;
 import com.danggeun.market.user.domain.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -54,5 +56,23 @@ public class ProductRepositoryTest {
         for (int i = 0; i < countOfImages; i++) {
             assertEquals(uploadedProductImages.get(i), product.getProductImages().get(i));
         }
+    }
+
+    @Test
+    void Product_Summary_조회() {
+        List<ProductSummaryResponse> productSummaries = productRepository.findProductSummaries(4L, 4)
+                .stream().collect(Collectors.toList());
+
+        //3
+        assertEquals(3, productSummaries.get(0).getCountOfReply());
+        assertEquals(3, productSummaries.get(0).getCountOfInterest());
+
+        //2
+        assertEquals(1, productSummaries.get(1).getCountOfReply());
+        assertEquals(0, productSummaries.get(1).getCountOfInterest());
+
+        //1
+        assertEquals(2, productSummaries.get(2).getCountOfReply());
+        assertEquals(1, productSummaries.get(2).getCountOfInterest());
     }
 }

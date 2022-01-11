@@ -52,6 +52,10 @@ public class Product {
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
     private List<ProductImage> productImages = new ArrayList<>();
 
+    @Embedded
+    @AttributeOverride(name = "imageUrl", column = @Column(name = "thumbnail_image_url"))
+    private ProductImage thumbnailImages;
+
     protected Product() {
     }
 
@@ -63,6 +67,9 @@ public class Product {
         this.description = description;
         this.status = ProductStatus.SELL;
         this.productImages = productImages;
+        if (!productImages.isEmpty()) {
+            thumbnailImages = productImages.get(0);
+        }
     }
 
     public Long getId() {
@@ -103,5 +110,9 @@ public class Product {
 
     public List<ProductImage> getProductImages() {
         return productImages;
+    }
+
+    public ProductImage getThumbnailImages() {
+        return thumbnailImages;
     }
 }

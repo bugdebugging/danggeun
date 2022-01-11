@@ -18,15 +18,16 @@ CREATE TABLE categories
 
 CREATE TABLE products
 (
-    id          bigint                             NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id     bigint                             NOT NULL,
-    category_id bigint                             NOT NULL,
-    name        varchar(50)                        NOT NULL,
-    price       bigint                             NOT NULL,
-    description varchar(2048)                      NOT NULL,
-    status      varchar(20)                        NOT NULL,
-    created_at  datetime default CURRENT_TIMESTAMP NOT NULL,
-    updated_at  datetime default CURRENT_TIMESTAMP NOT NULL,
+    id                  bigint                             NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id             bigint                             NOT NULL,
+    category_id         bigint                             NOT NULL,
+    name                varchar(50)                        NOT NULL,
+    price               bigint                             NOT NULL,
+    description         varchar(2048)                      NOT NULL,
+    status              varchar(20)                        NOT NULL,
+    thumbnail_image_url varchar(100)                       NULL,
+    created_at          datetime default CURRENT_TIMESTAMP NOT NULL,
+    updated_at          datetime default CURRENT_TIMESTAMP NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (category_id) REFERENCES categories (id)
 );
@@ -43,7 +44,7 @@ CREATE TABLE replies
     FOREIGN KEY (product_id) REFERENCES products (id)
 );
 
-CREATE TABLE interest_product_history
+CREATE TABLE interest_product_histories
 (
     id         bigint NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id    bigint NOT NULL,
