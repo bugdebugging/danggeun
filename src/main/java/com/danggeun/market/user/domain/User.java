@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 public class User {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -37,6 +37,14 @@ public class User {
     @Column
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Embedded
+    private UserImage userImage;
+
+    public void changeProfile(UserImage userImage, String nickname) {
+        this.userImage = userImage;
+        this.nickname = nickname;
+    }
 
     protected User() {
     }
@@ -79,5 +87,9 @@ public class User {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public UserImage getUserImage() {
+        return userImage;
     }
 }
