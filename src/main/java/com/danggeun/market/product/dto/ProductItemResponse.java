@@ -1,15 +1,14 @@
 package com.danggeun.market.product.dto;
 
 import com.danggeun.market.product.domain.Product;
-import com.danggeun.market.product.domain.ProductImage;
 
 public class ProductItemResponse {
     private Long id;
-    private ProductImage thumbnailImage;
+    private String thumbnailImage;
     private String name;
     private Long money;
 
-    private ProductItemResponse(Long id, ProductImage thumbnailImage, String name, Long money) {
+    private ProductItemResponse(Long id, String thumbnailImage, String name, Long money) {
         this.id = id;
         this.thumbnailImage = thumbnailImage;
         this.name = name;
@@ -17,7 +16,8 @@ public class ProductItemResponse {
     }
 
     public static ProductItemResponse fromEntity(Product product) {
-        return new ProductItemResponse(product.getId(), product.getThumbnailImages(),
+        return new ProductItemResponse(product.getId(),
+                product.getThumbnailImages() != null ? product.getThumbnailImages().getImageUrl() : null,
                 product.getName(), product.getPrice().getMoney());
     }
 
@@ -25,7 +25,7 @@ public class ProductItemResponse {
         return id;
     }
 
-    public ProductImage getThumbnailImage() {
+    public String getThumbnailImage() {
         return thumbnailImage;
     }
 
