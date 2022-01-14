@@ -8,7 +8,8 @@ server:
 spring:
   jackson:
     property-naming-strategy: SNAKE_CASE
-
+    serialization:
+      INDENT_OUTPUT: true
   h2:
     console:
       enabled: true
