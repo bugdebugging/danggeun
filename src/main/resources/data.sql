@@ -66,6 +66,6 @@ insert into product_images(product_id, image_url)
 values (1, 'https://s3.ap-northeast-2.amazonaws.com/danggeun/product/1/2');
 -- 2 이미지
 insert into product_images(product_id, image_url)
-values (1, 'https://s3.ap-northeast-2.amazonaws.com/danggeun/product/2/1');
+values (2, 'https://s3.ap-northeast-2.amazonaws.com/danggeun/product/2/1');
 insert into product_images(product_id, image_url)
-values (1, 'https://s3.ap-northeast-2.amazonaws.com/danggeun/product/2/2');
+values (2, 'https://s3.ap-northeast-2.amazonaws.com/danggeun/product/2/2');
