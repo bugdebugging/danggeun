@@ -18,16 +18,16 @@ insert into products(user_id,category_id, name, price, description, status,thumb
 values (1, 2, 'LG 냉장고', 1250000, '가성비 냉장고 판매', 'SELL','https://s3.ap-northeast-2.amazonaws.com/danggeun/product/2/1');
 -- 3
 insert into products(user_id,category_id, name, price, description, status)
-values (1, 2, '조명등', 33000, '굉장히 밝은 조명', 'SELL');
+values (1, 2, '조명등', 33000, '굉장히 밝은 조명', 'SOLD');
 
 insert into products(user_id,category_id, name, price, description, status)
 values (2, 1, 'MAC 노트북', 2500000, 'MAC BOOK 파라염', 'SELL');
 insert into products(user_id,category_id, name, price, description, status)
-values (2, 1, 'LG 모니터', 100000, '개꿀 모니터', 'SELL');
+values (2, 1, 'LG 모니터', 100000, '개꿀 모니터', 'SOLD');
 insert into products(user_id,category_id, name, price, description, status)
 values (2, 1, '마우스', 20000, '얼마 안쓴 마우스입니다', 'SELL');
 insert into products(user_id,category_id, name, price, description, status)
-values (2, 1, '로지텍 키보드', 55000, '에누리 금지', 'SELL');
+values (2, 1, '로지텍 키보드', 55000, '에누리 금지', 'SOLD');
 
 
 -- 1 댓글
