@@ -42,6 +42,13 @@ public class Reply {
         this.comment = comment;
     }
 
+    public void changeContent(Long userId, String comment) {
+        if (!userId.equals(writer.getId())) {
+            throw new IllegalArgumentException("댓글의 소유자만 지울 수 있습니다.");
+        }
+        this.comment = comment;
+    }
+
     public Long getId() {
         return id;
     }
