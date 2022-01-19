@@ -51,7 +51,8 @@ CREATE TABLE interest_product_histories
     user_id    bigint NOT NULL,
     product_id bigint NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (product_id) REFERENCES products (id)
+    FOREIGN KEY (product_id) REFERENCES products (id),
+    INDEX idx_user_id_product_id (user_id,product_id)
 );
 
 CREATE TABLE product_images
