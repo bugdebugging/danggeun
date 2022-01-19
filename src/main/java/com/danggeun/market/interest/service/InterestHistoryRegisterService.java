@@ -30,7 +30,7 @@ public class InterestHistoryRegisterService {
 
         interestHistoryRepository.findByUserAndProduct(user, product)
                 .ifPresent((interestHistory) -> {
-                    throw new IllegalArgumentException("이미 관심을 등록한 상품입니다.");
+                    throw new IllegalStateException("이미 관심을 등록한 상품입니다.");
                 });
 
         InterestHistory interestHistory = new InterestHistory(user, product);
