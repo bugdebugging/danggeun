@@ -72,6 +72,10 @@ public class Product {
         }
     }
 
+    public void changeStatus(ProductStatus status) {
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
