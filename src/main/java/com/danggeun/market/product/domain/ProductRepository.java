@@ -12,7 +12,7 @@ public interface ProductRepository extends JpaRepository<Product, Long>, Product
     List<Product> findProductBySeller(User seller);
 
     @Query("SELECT P FROM Product P " +
-            "JOIN FETCH P.productImages " +
+            "LEFT JOIN FETCH P.productImages " +
             "JOIN FETCH P.seller " +
             "JOIN FETCH P.category " +
             "WHERE P.id = :productId")
