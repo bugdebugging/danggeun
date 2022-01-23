@@ -21,7 +21,7 @@ public class ReplyModifyService {
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("해당 id의 댓글이 존재하지 않습니다.");
                 });
-        reply.changeContent(replyModifyCommand.getUserId(), replyModifyCommand.getComment());
+        reply.changeContent(replyModifyCommand.getComment());
 
         return ReplyResponse.fromEntity(reply);
     }
