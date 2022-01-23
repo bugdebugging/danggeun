@@ -1,4 +1,4 @@
-package com.danggeun.market.reply;
+package com.danggeun.market.reply.service;
 
 import com.danggeun.market.product.domain.ProductRepository;
 import com.danggeun.market.reply.domain.Reply;
