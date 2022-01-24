@@ -1,4 +1,8 @@
 version: 0.2
+env:
+  secrets-manager:
+    ACCESS_KEY: "danggeun-secret:ACCESS_KEY"
+    SECRET_KEY: "danggeun-secret:SECRET_KEY"
 phases:
   pre_build:
     commands:
