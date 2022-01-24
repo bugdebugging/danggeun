@@ -26,7 +26,6 @@ public class ProductSearchServiceIntegrationTest {
         assertEquals(1, result.getId());
         assertEquals(2, result.getProductImages().size(), "해당 제품의 이미지 개수는 2개");
 
-        assertEquals("디지털기기", result.getCategory());
         assertEquals(58000L, result.getPrice());
 
         assertEquals(1, result.getSeller().getId());
