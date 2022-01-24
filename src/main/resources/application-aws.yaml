@@ -1,0 +1,13 @@
+
+cloud:
+  aws:
+    region:
+      static: ${AWS_DEFAULT_REGION}
+      auto: false
+    credentials:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
+    s3:
+      bucket: ${AWS_S3_BUCKET}
+    stack:
+      auto: false
