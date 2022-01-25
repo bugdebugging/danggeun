@@ -114,10 +114,9 @@ public class ProductRepositoryTest {
 
     @Test
     void 카테고리별_Product_Summary_조회() {
-        Category category = categoryRepository.findById(1L).get();
-
+        final Long categoryId = 1L;
         ProductSearchCommand command = ProductSearchCommand.of()
-                .category(category)
+                .categoryId(categoryId)
                 .productId(5L)
                 .build();
         List<ProductSummaryResponse> productSummaries = productRepository.findProductSummaries(command, 10);

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -26,8 +27,6 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class ProductSearchService {
     private final ProductRepository productRepository;
     private final UserRepository userRepository;
-    private final CategoryRepository categoryRepository;
-
 
     public ProductDetailResponse searchProductDetail(Long productId) {
         Product product = productRepository.findProductByIdWithProductImagesAndSellerAndCategory(productId)
@@ -60,13 +59,8 @@ public class ProductSearchService {
     }
 
     public List<ProductSummaryResponse> searchProductByCategory(Long productId, Long categoryId, int size) {
-        checkArgument(categoryId != null, "해당 id와 일치하는 category가 존재하지 않습니다.");
-        Category category = categoryRepository.findById(categoryId)
-                .orElseThrow(() -> {
-                    throw new IllegalArgumentException("해당 id와 동일한 카테고리가 존재하지 않습니다.");
-                });
         ProductSearchCommand command = ProductSearchCommand.of()
-                .category(category)
+                .categoryId(categoryId)
                 .productId(productId)
                 .build();
 
