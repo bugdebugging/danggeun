@@ -1,7 +1,6 @@
 package com.danggeun.market.product.domain;
 
 import com.danggeun.market.category.domain.Category;
-import com.danggeun.market.interest.domain.InterestHistory;
 import com.danggeun.market.reply.domain.Reply;
 import com.danggeun.market.user.domain.User;
 import org.hibernate.annotations.CreationTimestamp;
@@ -153,9 +152,5 @@ public class Product {
 
     public List<Reply> getReplies() {
         return replies;
-    }
-
-    public List<InterestHistory> getInterestHistories() {
-        return interestHistories;
     }
 }
