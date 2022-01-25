@@ -1,6 +1,7 @@
 package com.danggeun.market.product.domain;
 
 import com.danggeun.market.category.domain.Category;
+import com.danggeun.market.interest.domain.InterestHistory;
 import com.danggeun.market.reply.domain.Reply;
 import com.danggeun.market.user.domain.User;
 import org.hibernate.annotations.CreationTimestamp;
@@ -82,9 +83,25 @@ public class Product {
         return reply;
     }
 
-    public void removeReply(Reply target) {
-        replies.remove(target);
+    public void removeReply(Long replyId) {
+        Reply targetReply = this.replies.stream()
+                .filter(reply -> reply.getId().equals(replyId))
+                .findFirst().orElseThrow(() -> {
+                    throw new IllegalArgumentException("해당 id의 댓글이 존재하지 않습니다.");
+                });
+        replies.remove(targetReply);
     }
+
+    public Reply changeReplyComment(Long replyId, String comment) {
+        Reply targetReply = this.replies.stream()
+                .filter(reply -> reply.getId().equals(replyId))
+                .findFirst().orElseThrow(() -> {
+                    throw new IllegalArgumentException("해당 id의 댓글이 존재하지 않습니다.");
+                });
+        targetReply.changeContent(comment);
+        return targetReply;
+    }
+
 
     public void changeStatus(ProductStatus status) {
         this.status = status;
@@ -136,5 +153,9 @@ public class Product {
 
     public List<Reply> getReplies() {
         return replies;
+    }
+
+    public List<InterestHistory> getInterestHistories() {
+        return interestHistories;
     }
 }

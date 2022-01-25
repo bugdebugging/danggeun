@@ -1,5 +1,7 @@
 package com.danggeun.market.reply.service;
 
+import com.danggeun.market.product.domain.Product;
+import com.danggeun.market.product.domain.ProductRepository;
 import com.danggeun.market.reply.domain.Reply;
 import com.danggeun.market.reply.domain.ReplyRepository;
 import com.danggeun.market.reply.dto.ReplyResponse;
@@ -14,24 +16,25 @@ import static com.google.common.base.Preconditions.checkArgument;
 @Transactional
 @RequiredArgsConstructor
 public class ReplyModifyService {
-    private final ReplyRepository replyRepository;
+    private final ProductRepository productRepository;
 
     public ReplyResponse modifyReply(ReplyModifyCommand replyModifyCommand) {
-        Reply reply = replyRepository.findByIdWithWriter(replyModifyCommand.getReplyId())
+        Product product = productRepository.findById(replyModifyCommand.getProductId())
                 .orElseThrow(() -> {
-                    throw new IllegalArgumentException("해당 id의 댓글이 존재하지 않습니다.");
+                    throw new IllegalArgumentException("해당 id의 상품이 존재하지 않습니다.");
                 });
-        reply.changeContent(replyModifyCommand.getComment());
-
+        Reply reply = product.changeReplyComment(replyModifyCommand.getReplyId(), replyModifyCommand.getComment());
         return ReplyResponse.fromEntity(reply);
     }
 
-    public void deleteReply(Long replyId) {
+    public void deleteReply(Long productId, Long replyId) {
+        checkArgument(productId != null, "상품의 id는 필수입니다.");
         checkArgument(replyId != null, "댓글 id는 필수입니다.");
-        Reply reply = replyRepository.findById(replyId)
+
+        Product product = productRepository.findById(productId)
                 .orElseThrow(() -> {
-                    throw new IllegalArgumentException("해당 id의 댓글이 존재하지 않습니다.");
+                    throw new IllegalArgumentException("해당 id의 상품이 존재하지 않습니다.");
                 });
-        replyRepository.delete(reply);
+        product.removeReply(replyId);
     }
 }
