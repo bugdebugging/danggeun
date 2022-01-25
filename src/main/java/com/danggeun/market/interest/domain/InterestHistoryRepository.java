@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface InterestHistoryRepository extends JpaRepository<InterestHistory, Long> {
-    @Query("SELECT IH,(SELECT COUNT(R) FROM Reply R WHERE R.productId=IH.product.id)," +
+    @Query("SELECT IH,(SELECT COUNT(R) FROM Reply R WHERE R.product.id=IH.product.id)," +
             "(SELECT COUNT(IH2) FROM InterestHistory IH2 WHERE IH2.product.id=IH.product.id)" +
             " FROM InterestHistory IH JOIN FETCH IH.product WHERE IH.user = :user")
     List<Object[]> searchInterestProduct(@Param("user") User user);

@@ -1,6 +1,7 @@
 package com.danggeun.market.product.domain;
 
 import com.danggeun.market.category.domain.Category;
+import com.danggeun.market.reply.domain.Reply;
 import com.danggeun.market.user.domain.User;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -52,6 +53,9 @@ public class Product {
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
     private List<ProductImage> productImages = new ArrayList<>();
 
+    @OneToMany(mappedBy = "product", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Reply> replies = new ArrayList<>();
+
     @Embedded
     @AttributeOverride(name = "imageUrl", column = @Column(name = "thumbnail_image_url"))
     private ProductImage thumbnailImages;
@@ -70,6 +74,16 @@ public class Product {
         if (!productImages.isEmpty()) {
             thumbnailImages = productImages.get(0);
         }
+    }
+
+    public Reply addReply(User writer, String comment) {
+        Reply reply = new Reply(writer, this, comment);
+        this.replies.add(reply);
+        return reply;
+    }
+
+    public void removeReply(Reply target) {
+        replies.remove(target);
     }
 
     public void changeStatus(ProductStatus status) {

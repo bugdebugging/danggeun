@@ -1,5 +1,6 @@
 package com.danggeun.market.reply.service;
 
+import com.danggeun.market.product.domain.Product;
 import com.danggeun.market.product.domain.ProductRepository;
 import com.danggeun.market.reply.domain.Reply;
 import com.danggeun.market.reply.domain.ReplyRepository;
@@ -15,9 +16,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @RequiredArgsConstructor
 public class ReplyPostService {
-    private final ReplyRepository replyRepository;
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
+    private final ReplyRepository replyRepository;
 
     public ReplyResponse postReplyToProduct(ReplyPostCommand replyPostCommand) {
         User user = userRepository.findById(replyPostCommand.getUserId())
@@ -25,12 +26,11 @@ public class ReplyPostService {
                     throw new IllegalArgumentException("해당 id의 유저가 존재하지 않습니다.");
                 });
 
-        productRepository.findById(replyPostCommand.getProductId())
+        Product product = productRepository.findById(replyPostCommand.getProductId())
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("해당 id의 상품이 존재하지 않습니다.");
                 });
-        Reply reply = new Reply(user, replyPostCommand.getProductId(), replyPostCommand.getComment());
-        replyRepository.save(reply);
-        return ReplyResponse.fromEntity(reply);
+        Reply reply = product.addReply(user, replyPostCommand.getComment());
+        return ReplyResponse.fromEntity(replyRepository.save(reply));
     }
 }

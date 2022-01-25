@@ -28,7 +28,7 @@ public class ProductRepositoryImpl implements ProductQueryRepository {
                         productStatusEq(command.getProductStatus()),
                         productCategoryEq(command.getCategoryId()),
                         productSellerEq(command.getSeller()))
-                .leftJoin(reply).on(product.id.eq(reply.productId))
+                .leftJoin(reply).on(product.eq(reply.product))
                 .leftJoin(interestHistory).on(product.id.eq(interestHistory.product.id))
                 .groupBy(product.id)
                 .orderBy(product.id.desc())

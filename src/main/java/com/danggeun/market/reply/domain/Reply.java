@@ -1,11 +1,13 @@
 package com.danggeun.market.reply.domain;
 
+import com.danggeun.market.product.domain.Product;
 import com.danggeun.market.user.domain.User;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Entity
 @Table(name = "replies")
@@ -19,8 +21,9 @@ public class Reply {
     @ManyToOne(fetch = FetchType.LAZY)
     private User writer;
 
-    @Column
-    private Long productId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
     @Column
     private String comment;
@@ -36,9 +39,9 @@ public class Reply {
     protected Reply() {
     }
 
-    public Reply(User writer, Long productId, String comment) {
+    public Reply(User writer, Product product, String comment) {
         this.writer = writer;
-        this.productId = productId;
+        this.product = product;
         this.comment = comment;
     }
 
@@ -54,8 +57,8 @@ public class Reply {
         return writer;
     }
 
-    public Long getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
     public String getComment() {
@@ -68,5 +71,18 @@ public class Reply {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reply reply = (Reply) o;
+        return Objects.equals(id, reply.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

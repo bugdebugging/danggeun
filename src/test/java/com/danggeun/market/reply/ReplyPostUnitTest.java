@@ -46,6 +46,6 @@ public class ReplyPostUnitTest {
         ReplyPostCommand replyPostCommand=new ReplyPostCommand(1L,1L,"this is reply test");
         replyPostService.postReplyToProduct(replyPostCommand);
 
-        verify(replyRepository, atLeastOnce()).save(any(Reply.class));
+        verify(productRepository, atLeastOnce()).save(any(Product.class));
     }
 }

@@ -1,5 +1,7 @@
 package com.danggeun.market.reply;
 
+import com.danggeun.market.product.domain.Product;
+import com.danggeun.market.product.domain.ProductRepository;
 import com.danggeun.market.reply.domain.Reply;
 import com.danggeun.market.reply.domain.ReplyRepository;
 import com.danggeun.market.user.domain.User;
@@ -16,10 +18,10 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ReplyRepositoryTest {
     @Autowired
     ReplyRepository replyRepository;
-
-
     @Autowired
     UserRepository userRepository;
+    @Autowired
+    ProductRepository productRepository;
 
     @Test
     void reply_저장() {
@@ -28,10 +30,11 @@ public class ReplyRepositoryTest {
         final String comments = "너무 비싸네요.";
 
         User user = userRepository.findById(userId).get();
-        Reply reply = new Reply(user, productId, comments);
-        Reply savedReply = replyRepository.save(reply);
+        Product product = productRepository.findById(productId).get();
+
+        Reply savedReply = product.addReply(user, comments);
+        productRepository.save(product);
 
         assertEquals(comments, savedReply.getComment());
-        assertNotNull(savedReply.getId());
     }
 }

@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
     @Query("SELECT R FROM Reply R " +
             "JOIN FETCH R.writer " +
-            "WHERE R.productId= :productId " +
+            "WHERE R.product.id= :productId " +
             "ORDER BY R.id DESC")
     List<Reply> findRepliesWithWriter(@Param("productId") Long productId,
                                       Pageable pageable);
