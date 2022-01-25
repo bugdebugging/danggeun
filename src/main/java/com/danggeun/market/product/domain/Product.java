@@ -133,4 +133,8 @@ public class Product {
     public ProductImage getThumbnailImages() {
         return thumbnailImages;
     }
+
+    public List<Reply> getReplies() {
+        return replies;
+    }
 }

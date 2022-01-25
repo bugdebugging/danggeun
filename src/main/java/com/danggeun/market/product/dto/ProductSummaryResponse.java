@@ -9,10 +9,10 @@ public class ProductSummaryResponse {
     private Long price;
     private String thumbnailImageUrl;
     private ProductStatus status;
-    private Long countOfReply;
+    private Integer countOfReply;
     private Long countOfInterest;
 
-    public ProductSummaryResponse(Product product, Long countOfReply, Long countOfInterest) {
+    public ProductSummaryResponse(Product product, Integer countOfReply, Long countOfInterest) {
         this.id = product.getId();
         this.name = product.getName();
         this.price = product.getPrice().getMoney();
@@ -43,7 +43,7 @@ public class ProductSummaryResponse {
         return status;
     }
 
-    public Long getCountOfReply() {
+    public Integer getCountOfReply() {
         return countOfReply;
     }
 

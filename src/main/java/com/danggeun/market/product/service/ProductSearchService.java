@@ -1,7 +1,5 @@
 package com.danggeun.market.product.service;
 
-import com.danggeun.market.category.domain.Category;
-import com.danggeun.market.category.domain.CategoryRepository;
 import com.danggeun.market.product.domain.Product;
 import com.danggeun.market.product.domain.ProductRepository;
 import com.danggeun.market.product.domain.ProductStatus;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkArgument;

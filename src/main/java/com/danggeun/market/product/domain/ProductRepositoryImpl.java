@@ -4,8 +4,10 @@ package com.danggeun.market.product.domain;
 import com.danggeun.market.product.dto.ProductSummaryResponse;
 import com.danggeun.market.product.service.dto.ProductSearchCommand;
 import com.danggeun.market.user.domain.User;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
+import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
@@ -21,16 +23,15 @@ public class ProductRepositoryImpl implements ProductQueryRepository {
 
     @Override
     public List<ProductSummaryResponse> findProductSummaries(ProductSearchCommand command, int size) {
-        return queryFactory.select(Projections.constructor(ProductSummaryResponse.class,
-                product, reply.countDistinct(), interestHistory.countDistinct()))
+        return queryFactory.select(Projections.constructor(ProductSummaryResponse.class
+                , product
+                , product.replies.size()
+                , JPAExpressions.select(interestHistory.count()).from(interestHistory).where(interestHistory.product.eq(product))))
                 .from(product)
                 .where(productIdLt(command.getProductId()),
                         productStatusEq(command.getProductStatus()),
                         productCategoryEq(command.getCategoryId()),
                         productSellerEq(command.getSeller()))
-                .leftJoin(reply).on(product.eq(reply.product))
-                .leftJoin(interestHistory).on(product.id.eq(interestHistory.product.id))
-                .groupBy(product.id)
                 .orderBy(product.id.desc())
                 .limit(size)
                 .fetch();
