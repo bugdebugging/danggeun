@@ -45,12 +45,8 @@ public class ProductSearchService {
         checkArgument(userId != null, "사용자의 id는 필수입니다.");
         checkArgument(status != null, "상품의 상태는 필수입니다.");
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> {
-                    throw new IllegalArgumentException("해당 id와 일치하는 사용자가 존재하지 않습니다.");
-                });
         ProductSearchCommand command = ProductSearchCommand.of()
-                .seller(user)
+                .sellerId(userId)
                 .productStatus(status)
                 .build();
         return productRepository.findProductSummaries(command, size);

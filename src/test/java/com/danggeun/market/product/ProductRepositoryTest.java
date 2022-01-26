@@ -79,11 +79,10 @@ public class ProductRepositoryTest {
 
     @Test
     void 판매자가_판매중인_Product_Summary_조회() {
-        User user = userRepository.findById(2L).get();
-
+        final Long userId = 2L;
         ProductSearchCommand command = ProductSearchCommand.of()
                 .productStatus(ProductStatus.SELL)
-                .seller(user)
+                .sellerId(userId)
                 .build();
         List<ProductSummaryResponse> productSummaries = productRepository.findProductSummaries(command, 10);
         assertEquals(2, productSummaries.size());
@@ -96,11 +95,11 @@ public class ProductRepositoryTest {
 
     @Test
     void 판매자가_거래완료한_Product_Summary_조회() {
-        User user = userRepository.findById(2L).get();
+        final Long userId = 2L;
 
         ProductSearchCommand command = ProductSearchCommand.of()
                 .productStatus(ProductStatus.SOLD)
-                .seller(user)
+                .sellerId(userId)
                 .build();
         List<ProductSummaryResponse> productSummaries = productRepository.findProductSummaries(command, 10);
         assertEquals(2, productSummaries.size());

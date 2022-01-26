@@ -3,7 +3,6 @@ package com.danggeun.market.product.domain;
 
 import com.danggeun.market.product.dto.ProductSummaryResponse;
 import com.danggeun.market.product.service.dto.ProductSearchCommand;
-import com.danggeun.market.user.domain.User;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -25,7 +24,7 @@ public class ProductRepositoryImpl implements ProductQueryRepository {
                 .where(productIdLt(command.getProductId()),
                         productStatusEq(command.getProductStatus()),
                         productCategoryEq(command.getCategoryId()),
-                        productSellerEq(command.getSeller()))
+                        productSellerEq(command.getSellerId()))
                 .orderBy(product.id.desc())
                 .limit(size)
                 .fetch();
@@ -52,10 +51,10 @@ public class ProductRepositoryImpl implements ProductQueryRepository {
         return product.category.id.eq(categoryId);
     }
 
-    private BooleanExpression productSellerEq(User seller) {
-        if (seller == null) {
+    private BooleanExpression productSellerEq(Long sellerId) {
+        if (sellerId == null) {
             return null;
         }
-        return product.seller.eq(seller);
+        return product.sellerId.eq(sellerId);
     }
 }

@@ -79,4 +79,32 @@ public class ProductSearchIntegrationTest {
                 .andExpect(jsonPath("$.data.another_products[1].name").value("조명등"))
                 .andExpect(jsonPath("$.data.another_products[1].money").value(33000));
     }
+
+    @Test
+    void 판매자가_올린_상품조회1() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/users/1/products?status=SELL"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].id").value(2))
+                .andExpect(jsonPath("$.data[0].status").value("SELL"))
+                .andExpect(jsonPath("$.data[1].id").value(1))
+                .andExpect(jsonPath("$.data[1].status").value("SELL"));
+    }
+
+    @Test
+    void 판매자가_올린_상품조회2() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/users/1/products?status=SOLD"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].id").value(3))
+                .andExpect(jsonPath("$.data[0].status").value("SOLD"));
+    }
+
+    @Test
+    void 판매자가_올린_상품조회3() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/users/2/products?status=SOLD"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].id").value(7))
+                .andExpect(jsonPath("$.data[0].status").value("SOLD"))
+                .andExpect(jsonPath("$.data[1].id").value(5))
+                .andExpect(jsonPath("$.data[1].status").value("SOLD"));
+    }
 }

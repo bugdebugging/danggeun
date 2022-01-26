@@ -1,21 +1,20 @@
 package com.danggeun.market.product.service.dto;
 
 import com.danggeun.market.product.domain.ProductStatus;
-import com.danggeun.market.user.domain.User;
 import lombok.Builder;
 
 public class ProductSearchCommand {
     private ProductStatus productStatus;
     private Long categoryId;
     private Long productId;
-    private User seller;
+    private Long sellerId;
 
     @Builder(builderMethodName = "of")
-    public ProductSearchCommand(ProductStatus productStatus, Long categoryId, Long productId, User seller) {
+    public ProductSearchCommand(ProductStatus productStatus, Long categoryId, Long productId, Long sellerId) {
         this.productStatus = productStatus;
         this.categoryId = categoryId;
         this.productId = productId;
-        this.seller = seller;
+        this.sellerId = sellerId;
     }
 
     public ProductStatus getProductStatus() {
@@ -31,7 +30,7 @@ public class ProductSearchCommand {
         return productId;
     }
 
-    public User getSeller() {
-        return seller;
+    public Long getSellerId() {
+        return sellerId;
     }
 }
