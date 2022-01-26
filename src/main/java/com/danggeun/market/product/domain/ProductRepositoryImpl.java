@@ -4,18 +4,14 @@ package com.danggeun.market.product.domain;
 import com.danggeun.market.product.dto.ProductSummaryResponse;
 import com.danggeun.market.product.service.dto.ProductSearchCommand;
 import com.danggeun.market.user.domain.User;
-import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
-import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
-import static com.danggeun.market.interest.domain.QInterestHistory.interestHistory;
 import static com.danggeun.market.product.domain.QProduct.product;
-import static com.danggeun.market.reply.domain.QReply.reply;
 
 @RequiredArgsConstructor
 public class ProductRepositoryImpl implements ProductQueryRepository {
@@ -24,7 +20,7 @@ public class ProductRepositoryImpl implements ProductQueryRepository {
     @Override
     public List<ProductSummaryResponse> findProductSummaries(ProductSearchCommand command, int size) {
         return queryFactory.select(Projections.constructor(ProductSummaryResponse.class
-                , product, product.replies.size(), product.interestHistories.size()))
+                , product, product.replies.size().castToNum(Long.class), product.interestHistories.size().castToNum(Long.class)))
                 .from(product)
                 .where(productIdLt(command.getProductId()),
                         productStatusEq(command.getProductStatus()),

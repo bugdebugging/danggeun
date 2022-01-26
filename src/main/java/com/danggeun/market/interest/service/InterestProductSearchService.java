@@ -30,8 +30,8 @@ public class InterestProductSearchService {
         List<Object[]> result = interestHistoryRepository.searchInterestProduct(user);
         return result.stream()
                 .map(objects -> new ProductSummaryResponse(((InterestHistory) objects[0]).getProduct(),
-                        (Integer) objects[1],
-                        (Integer) objects[2]))
+                        (Long) objects[1],
+                        (Long) objects[2]))
                 .collect(Collectors.toList());
     }
 }
