@@ -16,20 +16,15 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class ProductPostService {
     private final ProductRepository productRepository;
-    private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
 
     public Long postProduct(ProductPostCommand productPostCommand) {
-        User user = userRepository.findById(productPostCommand.getUserId())
-                .orElseThrow(() -> {
-                    throw new IllegalArgumentException("해당 id의 사용자가 존재하지 않습니다.");
-                });
         Category category = categoryRepository.findById(productPostCommand.getCategoryId())
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("해당 id의 카테고리가 존재하지 않습니다.");
                 });
 
-        Product product = new Product(user, category,
+        Product product = new Product(productPostCommand.getUserId(), category,
                 productPostCommand.getName(),
                 productPostCommand.getPrice(),
                 productPostCommand.getDescription(),

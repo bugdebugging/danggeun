@@ -35,11 +35,11 @@ public class InterestHistoryRegisterServiceUnitTest {
 
     @Test
     void 이미_관심_등록한경우_예외발생() {
-        final User user = new User("email", "password", "name", "phone", "nickname");
-        final Product product = new Product(user, new Category("학용품"), "name", Money.of(10000L), "description", new ArrayList<>());
-        final InterestHistory interestHistory = new InterestHistory(user, product);
         final Long userId = 1L;
         final Long productId = 1L;
+        final User user = new User("email", "password", "name", "phone", "nickname");
+        final Product product = new Product(userId, new Category("학용품"), "name", Money.of(10000L), "description", new ArrayList<>());
+        final InterestHistory interestHistory = new InterestHistory(user, product);
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(productRepository.findById(productId)).thenReturn(Optional.of(product));
@@ -52,10 +52,10 @@ public class InterestHistoryRegisterServiceUnitTest {
 
     @Test
     void 올바른_관심_등록_성공() {
-        final User user = new User("email", "password", "name", "phone", "nickname");
-        final Product product = new Product(user, new Category("학용품"), "name", Money.of(10000L), "description", new ArrayList<>());
         final Long userId = 1L;
         final Long productId = 1L;
+        final User user = new User("email", "password", "name", "phone", "nickname");
+        final Product product = new Product(userId, new Category("학용품"), "name", Money.of(10000L), "description", new ArrayList<>());
 
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
         when(productRepository.findById(productId)).thenReturn(Optional.of(product));

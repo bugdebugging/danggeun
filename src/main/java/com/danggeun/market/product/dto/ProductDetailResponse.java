@@ -1,6 +1,7 @@
 package com.danggeun.market.product.dto;
 
 import com.danggeun.market.product.domain.Product;
+import com.danggeun.market.user.domain.User;
 import com.danggeun.market.user.dto.UserSummaryResponse;
 
 import java.time.LocalDateTime;
@@ -18,12 +19,12 @@ public class ProductDetailResponse {
     private LocalDateTime createdAt;
     private List<ProductItemResponse> anotherProducts;
 
-    public ProductDetailResponse(Product product, List<ProductItemResponse> anotherProducts) {
+    public ProductDetailResponse(User seller, Product product, List<ProductItemResponse> anotherProducts) {
         this.id = product.getId();
         this.productImages = product.getProductImages().stream()
                 .map(productImage -> productImage.getImageUrl())
                 .collect(Collectors.toList());
-        this.seller = UserSummaryResponse.fromEntity(product.getSeller());
+        this.seller = UserSummaryResponse.fromEntity(seller);
         this.name = product.getName();
         this.description = product.getDescription();
         this.category = product.getCategory().getName();

@@ -20,9 +20,8 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "user_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User seller;
+    @Column(name = "user_id")
+    private Long sellerId;
 
     @JoinColumn(name = "category_id")
     @ManyToOne(fetch = FetchType.LAZY)
@@ -67,8 +66,8 @@ public class Product {
     protected Product() {
     }
 
-    public Product(User seller, Category category, String name, Money price, String description, List<ProductImage> productImages) {
-        this.seller = seller;
+    public Product(Long sellerId, Category category, String name, Money price, String description, List<ProductImage> productImages) {
+        this.sellerId = sellerId;
         this.category = category;
         this.name = name;
         this.price = price;
@@ -128,8 +127,8 @@ public class Product {
         return id;
     }
 
-    public User getSeller() {
-        return seller;
+    public Long getSellerId() {
+        return sellerId;
     }
 
     public Category getCategory() {

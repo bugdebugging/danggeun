@@ -36,14 +36,15 @@ public class ReplyPostUnitTest {
 
     @Test
     void 정상적인_댓글_등록() {
-        final Category category=new Category("의류");
+        final Long userId = 1L;
+        final Category category = new Category("의류");
         final User user = new User("email", "pw", "name", "phone", "nickname");
-        final Product product=new Product(user,category,"패딩", Money.of(14000L),"패딩",new ArrayList<>());
+        final Product product = new Product(userId, category, "패딩", Money.of(14000L), "패딩", new ArrayList<>());
 
         when(userRepository.findById(anyLong())).thenReturn(Optional.of(user));
         when(productRepository.findById(anyLong())).thenReturn(Optional.of(product));
 
-        ReplyPostCommand replyPostCommand=new ReplyPostCommand(1L,1L,"this is reply test");
+        ReplyPostCommand replyPostCommand = new ReplyPostCommand(1L, 1L, "this is reply test");
         replyPostService.postReplyToProduct(replyPostCommand);
 
         verify(productRepository, atLeastOnce()).save(any(Product.class));

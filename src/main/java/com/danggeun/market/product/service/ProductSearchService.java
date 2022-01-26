@@ -26,18 +26,19 @@ public class ProductSearchService {
     private final UserRepository userRepository;
 
     public ProductDetailResponse searchProductDetail(Long productId) {
-        Product product = productRepository.findProductByIdWithProductImagesAndSellerAndCategory(productId)
+        Product product = productRepository.findProductByIdWithProductImagesAndCategory(productId)
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("해당 id와 동일한 상품이 존재하지 않습니다.");
                 });
+        User seller = userRepository.findById(product.getSellerId()).get();
 
-        List<ProductItemResponse> productItemResponses = productRepository.findProductBySeller(product.getSeller())
+        List<ProductItemResponse> anotherProductBelongingToSeller = productRepository.findProductBySellerId(product.getSellerId())
                 .stream()
                 .filter(anotherProduct -> anotherProduct.getId() != productId)
                 .map(productBelongingSeller -> ProductItemResponse.fromEntity(productBelongingSeller))
                 .collect(Collectors.toList());
 
-        return new ProductDetailResponse(product, productItemResponses);
+        return new ProductDetailResponse(seller, product, anotherProductBelongingToSeller);
     }
 
     public List<ProductSummaryResponse> searchProductBySellerAndStatus(Long userId, ProductStatus status, int size) {
