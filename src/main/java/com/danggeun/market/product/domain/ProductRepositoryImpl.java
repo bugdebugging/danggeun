@@ -24,9 +24,7 @@ public class ProductRepositoryImpl implements ProductQueryRepository {
     @Override
     public List<ProductSummaryResponse> findProductSummaries(ProductSearchCommand command, int size) {
         return queryFactory.select(Projections.constructor(ProductSummaryResponse.class
-                , product
-                , product.replies.size()
-                , JPAExpressions.select(interestHistory.count()).from(interestHistory).where(interestHistory.product.eq(product))))
+                , product, product.replies.size(), product.interestHistories.size()))
                 .from(product)
                 .where(productIdLt(command.getProductId()),
                         productStatusEq(command.getProductStatus()),

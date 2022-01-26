@@ -10,9 +10,9 @@ public class ProductSummaryResponse {
     private String thumbnailImageUrl;
     private ProductStatus status;
     private Integer countOfReply;
-    private Long countOfInterest;
+    private Integer countOfInterest;
 
-    public ProductSummaryResponse(Product product, Integer countOfReply, Long countOfInterest) {
+    public ProductSummaryResponse(Product product, Integer countOfReply, Integer countOfInterest) {
         this.id = product.getId();
         this.name = product.getName();
         this.price = product.getPrice().getMoney();
@@ -47,7 +47,7 @@ public class ProductSummaryResponse {
         return countOfReply;
     }
 
-    public Long getCountOfInterest() {
+    public Integer getCountOfInterest() {
         return countOfInterest;
     }
 }

@@ -31,7 +31,7 @@ public class InterestProductSearchService {
         return result.stream()
                 .map(objects -> new ProductSummaryResponse(((InterestHistory) objects[0]).getProduct(),
                         (Integer) objects[1],
-                        (Long) objects[2]))
+                        (Integer) objects[2]))
                 .collect(Collectors.toList());
     }
 }
