@@ -1,40 +1,36 @@
 package com.danggeun.market.reply;
 
-import com.danggeun.market.reply.dto.ReplyResponse;
-import com.danggeun.market.reply.service.ReplySearchService;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
+@AutoConfigureMockMvc
 public class ReplySearchIntegrationTest {
     @Autowired
-    ReplySearchService replySearchService;
-    @Autowired
-    ObjectMapper objectMapper;
+    MockMvc mvc;
 
     @Test
-    void 상품의댓글_조회() throws JsonProcessingException {
-        final Long productId = 3L;
-        final int page = 0;
-        final int size = 2;
+    void 댓글조회1() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/api/products/1/replies"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].id").value(2))
+                .andExpect(jsonPath("$.data[0].user_summary_response.id").value(2))
+                .andExpect(jsonPath("$.data[1].id").value(1))
+                .andExpect(jsonPath("$.data[1].user_summary_response.id").value(2));
+    }
 
-        List<ReplyResponse> result = replySearchService.searchReplies(productId, page, size);
-
-        assertEquals(2, result.size(), "3번 상품의 댓글은 3개");
-
-        assertEquals(6, result.get(0).getId());
-        assertEquals(5, result.get(1).getId());
-
-        assertEquals(2, result.get(0).getUserSummaryResponse().getId());
-        assertEquals(2, result.get(1).getUserSummaryResponse().getId());
-
-        System.out.println(objectMapper.writeValueAsString(result));
+    @Test
+    void 댓글조회2() throws Exception {
+        mvc.perform(MockMvcRequestBuilders.get("/api/products/2/replies"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data[0].id").value(3))
+                .andExpect(jsonPath("$.data[0].user_summary_response.id").value(2));
     }
 }
