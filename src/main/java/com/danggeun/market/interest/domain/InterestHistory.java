@@ -14,6 +14,7 @@ public class InterestHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private Long userId;
 
     @JoinColumn(name = "product_id")
