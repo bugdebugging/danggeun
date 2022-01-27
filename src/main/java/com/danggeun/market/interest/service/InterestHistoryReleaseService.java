@@ -9,15 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class InterestHistoryRegisterService {
+public class InterestHistoryReleaseService {
     private final ProductRepository productRepository;
 
-    public void giveInterestToProduct(Long productId, Long userId) {
+    public void releaseInterestHistory(Long productId,Long userId) {
         Product product = productRepository.findById(productId)
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("해당 id의 상품이 존재하지 않습니다.");
                 });
-
-        product.addInterest(userId);
+        product.removeInterest(userId);
     }
 }

@@ -104,19 +104,28 @@ public class Product {
         return targetReply;
     }
 
-    public InterestHistory addInterest(User user) {
-        InterestHistory interestHistory = new InterestHistory(user, this);
+    public InterestHistory addInterest(Long userId) {
+        checkCanAddInterestBy(userId);
+        InterestHistory interestHistory = new InterestHistory(userId, this);
         this.interestHistories.add(interestHistory);
         return interestHistory;
     }
 
-    public void removeInterest(Long interestHistoryId) {
+    public void removeInterest(Long userId) {
         InterestHistory targetInterestHistory = this.interestHistories.stream()
-                .filter(interestHistory -> interestHistory.getId().equals(interestHistoryId))
+                .filter(interestHistory -> interestHistory.getUserId().equals(userId))
                 .findFirst().orElseThrow(() -> {
-                    throw new IllegalArgumentException("해당 id의 관심이 존재하지 않습니다.");
+                    throw new IllegalArgumentException("사용자가 등록한 관심이 존재하지 않습니다.");
                 });
         this.interestHistories.remove(targetInterestHistory);
+    }
+
+    private void checkCanAddInterestBy(Long userId) {
+        this.interestHistories.stream()
+                .filter(interestHistory -> interestHistory.getUserId().equals(userId))
+                .findFirst().ifPresent(interestHistory -> {
+            throw new IllegalStateException("이미 관심에 등록했습니다.");
+        });
     }
 
     public void changeStatus(ProductStatus status) {
