@@ -111,11 +111,11 @@ public class Product {
         return interestHistory;
     }
 
-    public void removeInterest(Long interestHistoryId) {
+    public void removeInterest(Long userId) {
         InterestHistory targetInterestHistory = this.interestHistories.stream()
-                .filter(interestHistory -> interestHistory.getId().equals(interestHistoryId))
+                .filter(interestHistory -> interestHistory.getUserId().equals(userId))
                 .findFirst().orElseThrow(() -> {
-                    throw new IllegalArgumentException("해당 관심이 존재하지 않습니다.");
+                    throw new IllegalArgumentException("관심을 추가한적이 없습니다.");
                 });
         this.interestHistories.remove(targetInterestHistory);
     }
