@@ -13,7 +13,7 @@ public class InterestHistoryRegisterService {
     private final ProductRepository productRepository;
 
     public void giveInterestToProduct(Long productId, Long userId) {
-        Product product = productRepository.findById(productId)
+        Product product = productRepository.findProductByIdWithInterestHistories(productId)
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("해당 id의 상품이 존재하지 않습니다.");
                 });

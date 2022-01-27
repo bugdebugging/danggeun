@@ -36,10 +36,10 @@ public class InterestHistoryRegisterServiceUnitTest {
         final Product product = new Product(userId, new Category("학용품"), "name", Money.of(10000L), "description", new ArrayList<>());
         product.addInterest(userId);
 
-        when(productRepository.findById(productId)).thenReturn(Optional.of(product));
+        when(productRepository.findProductByIdWithInterestHistories(productId)).thenReturn(Optional.of(product));
 
         assertThrows(IllegalStateException.class, () -> {
-            interestHistoryRegisterService.giveInterestToProduct(userId, productId);
+            interestHistoryRegisterService.giveInterestToProduct(productId, userId);
         }, "이미 관심 등록한 경우 예외발생.");
     }
 
@@ -49,9 +49,9 @@ public class InterestHistoryRegisterServiceUnitTest {
         final Long productId = 1L;
         final Product product = new Product(userId, new Category("학용품"), "name", Money.of(10000L), "description", new ArrayList<>());
 
-        when(productRepository.findById(productId)).thenReturn(Optional.of(product));
+        when(productRepository.findProductByIdWithInterestHistories(productId)).thenReturn(Optional.of(product));
 
-        interestHistoryRegisterService.giveInterestToProduct(userId, productId);
+        interestHistoryRegisterService.giveInterestToProduct(productId, userId);
         int result = product.getInterestHistories().stream()
                 .filter(interestHistory -> interestHistory.getUserId().equals(userId))
                 .collect(Collectors.toList()).size();
