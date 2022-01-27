@@ -17,9 +17,8 @@ public class Reply {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "user_id")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private User writer;
+    @Column(name = "user_id")
+    private Long author;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
@@ -39,8 +38,8 @@ public class Reply {
     protected Reply() {
     }
 
-    public Reply(User writer, Product product, String comment) {
-        this.writer = writer;
+    public Reply(Long author, Product product, String comment) {
+        this.author = author;
         this.product = product;
         this.comment = comment;
     }
@@ -53,8 +52,8 @@ public class Reply {
         return id;
     }
 
-    public User getWriter() {
-        return writer;
+    public Long getAuthor() {
+        return author;
     }
 
     public Product getProduct() {

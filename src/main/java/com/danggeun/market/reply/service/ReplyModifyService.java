@@ -18,13 +18,12 @@ import static com.google.common.base.Preconditions.checkArgument;
 public class ReplyModifyService {
     private final ProductRepository productRepository;
 
-    public ReplyResponse modifyReply(ReplyModifyCommand replyModifyCommand) {
+    public void modifyReply(ReplyModifyCommand replyModifyCommand) {
         Product product = productRepository.findById(replyModifyCommand.getProductId())
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("해당 id의 상품이 존재하지 않습니다.");
                 });
-        Reply reply = product.changeReplyComment(replyModifyCommand.getReplyId(), replyModifyCommand.getComment());
-        return ReplyResponse.fromEntity(reply);
+        product.changeReplyComment(replyModifyCommand.getReplyId(), replyModifyCommand.getComment());
     }
 
     public void deleteReply(Long productId, Long replyId) {

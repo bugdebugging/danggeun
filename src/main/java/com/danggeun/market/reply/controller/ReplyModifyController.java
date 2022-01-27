@@ -19,8 +19,8 @@ public class ReplyModifyController {
                                  @PathVariable("replyId") Long replyId,
                                  @RequestBody ReplyModifyRequest replyModifyRequest) {
         ReplyModifyCommand replyModifyCommand = new ReplyModifyCommand(productId, replyId, replyModifyRequest.getComment());
-
-        return ApiUtils.success(replyModifyService.modifyReply(replyModifyCommand));
+        replyModifyService.modifyReply(replyModifyCommand);
+        return ApiUtils.success(null);
     }
 
     @DeleteMapping("/products/{productId}/replies/{replyId}")

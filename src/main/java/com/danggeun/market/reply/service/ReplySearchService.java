@@ -1,7 +1,9 @@
 package com.danggeun.market.reply.service;
 
+import com.danggeun.market.reply.domain.Reply;
 import com.danggeun.market.reply.domain.ReplyRepository;
 import com.danggeun.market.reply.dto.ReplyResponse;
+import com.danggeun.market.user.domain.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -17,8 +19,9 @@ public class ReplySearchService {
     private final ReplyRepository replyRepository;
 
     public List<ReplyResponse> searchReplies(Long productId, int page, int size) {
-        return replyRepository.findRepliesWithWriter(productId, PageRequest.of(page, size))
-                .stream().map(reply -> ReplyResponse.fromEntity(reply))
+        return replyRepository.findRepliesWithWriterTest(productId, PageRequest.of(page, size))
+                .stream().map(objects -> new ReplyResponse((Reply) objects[0], (User) objects[1]))
                 .collect(Collectors.toList());
+
     }
 }

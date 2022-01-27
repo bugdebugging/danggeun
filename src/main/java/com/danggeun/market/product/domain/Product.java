@@ -79,8 +79,8 @@ public class Product {
         }
     }
 
-    public Reply addReply(User writer, String comment) {
-        Reply reply = new Reply(writer, this, comment);
+    public Reply addReply(Long userId, String comment) {
+        Reply reply = new Reply(userId, this, comment);
         this.replies.add(reply);
         return reply;
     }

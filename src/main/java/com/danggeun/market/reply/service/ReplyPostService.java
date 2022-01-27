@@ -30,7 +30,7 @@ public class ReplyPostService {
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("해당 id의 상품이 존재하지 않습니다.");
                 });
-        Reply reply = product.addReply(user, replyPostCommand.getComment());
-        return ReplyResponse.fromEntity(replyRepository.save(reply));
+        Reply reply = product.addReply(replyPostCommand.getUserId(), replyPostCommand.getComment());
+        return new ReplyResponse(replyRepository.save(reply), user);
     }
 }

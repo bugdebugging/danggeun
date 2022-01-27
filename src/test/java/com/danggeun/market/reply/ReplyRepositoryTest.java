@@ -29,10 +29,9 @@ public class ReplyRepositoryTest {
         final Long productId = 1L;
         final String comments = "너무 비싸네요.";
 
-        User user = userRepository.findById(userId).get();
         Product product = productRepository.findById(productId).get();
 
-        Reply savedReply = product.addReply(user, comments);
+        Reply savedReply = product.addReply(userId, comments);
         productRepository.save(product);
 
         assertEquals(comments, savedReply.getComment());
