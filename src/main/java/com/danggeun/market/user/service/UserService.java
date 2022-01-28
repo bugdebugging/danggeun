@@ -4,6 +4,7 @@ import com.danggeun.market.common.auth.UserAuthWrapper;
 import com.danggeun.market.user.domain.User;
 import com.danggeun.market.user.domain.UserRepository;
 import com.danggeun.market.user.dto.UserDetailResponse;
+import com.danggeun.market.user.service.dto.AuthSignUpCommand;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -16,6 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+
+    public UserDetailResponse singUpForNewUser(AuthSignUpCommand authSignUpCommand) {
+        User user = new User(authSignUpCommand.getEmail(),
+                authSignUpCommand.getPassword(),
+                authSignUpCommand.getName(),
+                authSignUpCommand.getPhone(),
+                authSignUpCommand.getNickname());
+        userRepository.save(user);
+        return UserDetailResponse.fromEntity(user);
+    }
 
     public UserDetailResponse searchUserInfo(Long userId) {
         User user = userRepository.findById(userId)
