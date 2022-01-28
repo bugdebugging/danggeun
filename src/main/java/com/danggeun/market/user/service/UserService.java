@@ -27,7 +27,6 @@ public class UserService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        //Authority를 패치조인으로 들고와서 N+1문제를 막아야한다.
         User user = userRepository.findUserByEmail(username)
                 .orElseThrow(() -> {
                     throw new IllegalArgumentException("해당 email의 유저가 존재하지 않습니다.");
