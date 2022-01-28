@@ -17,6 +17,12 @@ CREATE TABLE users
     updated_at datetime default CURRENT_TIMESTAMP NOT NULL,
     image_url  varchar(100) NULL
 );
+CREATE TABLE user_authorities
+(
+    user_id   bigint      NOT NULL,
+    authority varchar(30) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users (id)
+);
 
 CREATE TABLE categories
 (
@@ -59,7 +65,7 @@ CREATE TABLE interest_product_histories
     product_id bigint NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (product_id) REFERENCES products (id),
-    INDEX idx_user_id_product_id (user_id,product_id)
+    INDEX      idx_user_id_product_id (user_id,product_id)
 );
 
 CREATE TABLE product_images

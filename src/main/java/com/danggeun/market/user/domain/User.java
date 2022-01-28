@@ -6,6 +6,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
@@ -40,6 +42,10 @@ public class User {
 
     @Embedded
     private UserImage userImage;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "user_authorities", joinColumns = @JoinColumn(name = "user_id"))
+    private List<UserAuthority> authorities = new ArrayList<>();
 
     public void changeProfile(UserImage userImage, String nickname) {
         this.userImage = userImage;
@@ -91,5 +97,9 @@ public class User {
 
     public UserImage getUserImage() {
         return userImage;
+    }
+
+    public List<UserAuthority> getAuthorities() {
+        return authorities;
     }
 }
