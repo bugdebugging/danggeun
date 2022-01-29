@@ -3,6 +3,7 @@ DROP TABLE IF EXISTS interest_product_histories;
 DROP TABLE IF EXISTS replies;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS categories;
+DROP TABLE IF EXISTS user_authorities;
 DROP TABLE IF EXISTS users;
 
 CREATE TABLE users
