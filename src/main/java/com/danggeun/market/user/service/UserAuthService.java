@@ -15,24 +15,19 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class UserService implements UserDetailsService {
+public class UserAuthService implements UserDetailsService {
     private final UserRepository userRepository;
 
     public UserDetailResponse singUpForNewUser(AuthSignUpCommand authSignUpCommand) {
+        //email 중복 체크 해야함.
+
         User user = new User(authSignUpCommand.getEmail(),
                 authSignUpCommand.getPassword(),
                 authSignUpCommand.getName(),
                 authSignUpCommand.getPhone(),
                 authSignUpCommand.getNickname());
-        userRepository.save(user);
-        return UserDetailResponse.fromEntity(user);
-    }
 
-    public UserDetailResponse searchUserInfo(Long userId) {
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> {
-                    throw new IllegalArgumentException("해당 id의 유저가 존재하지 않습니다.");
-                });
+        userRepository.save(user);
         return UserDetailResponse.fromEntity(user);
     }
 

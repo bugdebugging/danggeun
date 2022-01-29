@@ -34,3 +34,8 @@ logging:
       amazonaws:
         util:
           EC2MetadataUtils: error
+
+jwt:
+  issuer: dangguen.com
+  secret: sample-secret
+  expired: 600000
