@@ -1,3 +1,38 @@
+server:
+  port: 8080
+  servlet:
+    encoding:
+      force: true
+    context-path: /
+
 spring:
-  profiles:
-    active: dev , aws
+  jackson:
+    property-naming-strategy: SNAKE_CASE
+    serialization:
+      INDENT_OUTPUT: true
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: ${DB_URL}
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+
+jwt:
+  issuer: dangguen.com
+  secret: sample-secret
+  expired: 600000
+
+cloud:
+  aws:
+    region:
+      static: ${AWS_DEFAULT_REGION}
+      auto: false
+    credentials:
+      access-key: ${ACCESS_KEY}
+      secret-key: ${SECRET_KEY}
+    s3:
+      bucket: ${AWS_S3_BUCKET}
+    stack:
+      auto: false
