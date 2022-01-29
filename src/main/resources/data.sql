@@ -2,7 +2,7 @@ insert into users(email, password, phone, name, nickname)
 values ('myemail@kw.ac.kr', 'sample_pw', '111-1111-111', 'myname', 'mynickname');
 
 insert into users(email, password, phone, name, nickname)
-values ('youremail@kw.ac.kr', 'sample_pw2', '222-2222-222', 'yourname', 'yournickname');
+values ('youremail@kw.ac.kr', '$2a$10$ej2ttR9Z5HWYN2Ge3N0G2OmONJkTsuTfVQA9JMcxWLeRr/ix/MoNq', '222-2222-222', 'yourname', 'yournickname');
 
 insert into users(email, password, phone, name, nickname)
 values ('email@company.com', 'pw', '333-3333-333', 'name', 'nickname');

@@ -7,6 +7,11 @@ public class AuthLoginRequest {
     public AuthLoginRequest() {
     }
 
+    public AuthLoginRequest(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
