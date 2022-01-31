@@ -11,6 +11,6 @@ public class GeneralControllerAdvice {
             IllegalArgumentException.class})
     public ResponseEntity<ApiResult> handleBusinessException(Exception e) {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body(ApiUtils.fail(404, e.getMessage()));
+                .body(ApiUtils.fail(400, e.getMessage()));
     }
 }
