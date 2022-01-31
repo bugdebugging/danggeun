@@ -19,8 +19,9 @@ public class UserAuthService implements UserDetailsService {
     private final UserRepository userRepository;
 
     public UserDetailResponse singUpForNewUser(AuthSignUpCommand authSignUpCommand) {
-        //email 중복 체크 해야함.
-
+        if (userRepository.existsUserByEmail(authSignUpCommand.getEmail())) {
+            throw new IllegalStateException("해당 email의 사용자가 이미 존재합니다.");
+        }
         User user = new User(authSignUpCommand.getEmail(),
                 authSignUpCommand.getPassword(),
                 authSignUpCommand.getName(),
