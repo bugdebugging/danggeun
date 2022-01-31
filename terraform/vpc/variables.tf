@@ -21,5 +21,5 @@ variable "name" {
   default = "danggeun-vpc"
 }
 variable "eks-cluster-name" {
-  default = "danggeun-eks-cluster"
+  default = "base-eks-cluster"
 }
