@@ -6,13 +6,15 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
     @Column
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -37,6 +39,18 @@ public class User {
     @Column
     @UpdateTimestamp
     private LocalDateTime updatedAt;
+
+    @Embedded
+    private UserImage userImage;
+
+    @ElementCollection(fetch = FetchType.LAZY)
+    @CollectionTable(name = "user_authorities", joinColumns = @JoinColumn(name = "user_id"))
+    private List<UserAuthority> authorities = new ArrayList<>();
+
+    public void changeProfile(UserImage userImage, String nickname) {
+        this.userImage = userImage;
+        this.nickname = nickname;
+    }
 
     protected User() {
     }
@@ -79,5 +93,13 @@ public class User {
 
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
+    }
+
+    public UserImage getUserImage() {
+        return userImage;
+    }
+
+    public List<UserAuthority> getAuthorities() {
+        return authorities;
     }
 }

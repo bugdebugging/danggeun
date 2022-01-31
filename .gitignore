@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/src/main/resources/application-aws-local.yaml
+/src/main/resources/application-dev.yaml
+/src/test/resources/application.yaml
