@@ -1,2 +1,4 @@
 variable "name" {}
-variable "region" {}
+variable "region" {
+  default = "ap-northeast-2"
+}
