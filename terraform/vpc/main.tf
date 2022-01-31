@@ -13,7 +13,7 @@ module "vpc" {
   single_nat_gateway = true
 
   tags = {
-    "kubernetes.io/cluster/${}" = "shared"
+    "kubernetes.io/cluster/${var.eks-cluster-name}" = "shared"
   }
   public_subnet_tags = {
     "kubernetes.io/cluster/${var.eks-cluster-name}" = "shared"
