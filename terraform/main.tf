@@ -34,3 +34,8 @@ module "ecr" {
   source = "./ecr"
   name = var.name
 }
+
+module "s3" {
+  source = "./s3"
+  name = var.name
+}
