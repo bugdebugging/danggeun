@@ -1,9 +1,8 @@
 variable "region" {}
+
+variable "name" {}
 variable "eks-cluster-name" {}
 
-variable "vpc_name" {}
-
-variable "rds_name" {}
 variable "engine" {}
 variable "engine_version" {}
 variable "instance_class" {}
@@ -13,13 +12,13 @@ variable "db_password" {}
 
 module "vpc" {
   source = "./vpc"
-  name = var.vpc_name
+  name = var.name
   region = var.region
   eks-cluster-name = var.eks-cluster-name
 }
 module "rds" {
   source = "./rds"
-  name = var.rds_name
+  name = var.name
   engine = var.engine
   engine_version = var.engine_version
   instance_class = var.instance_class

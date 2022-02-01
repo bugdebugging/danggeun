@@ -13,5 +13,5 @@ variable "name" {}
 variable "engine_version" {
 }
 variable "allocated_storage" {}
-variable "db_password" {}
 variable "db_user" {}
+variable "db_password" {}
