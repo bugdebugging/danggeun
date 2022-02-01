@@ -16,6 +16,7 @@ module "vpc" {
   region = var.region
   eks-cluster-name = var.eks-cluster-name
 }
+
 module "rds" {
   source = "./rds"
   name = var.name
