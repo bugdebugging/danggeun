@@ -11,7 +11,6 @@ variable "db_subnet_group_ids" {
 variable "name" {}
 
 variable "engine_version" {
-  default = "8.0.11"
 }
 variable "allocated_storage" {}
 variable "db_password" {}

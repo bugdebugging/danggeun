@@ -3,7 +3,7 @@ variable "engine" {
   default = "mysql"
 }
 variable "engine_version" {
-  default = 8.0.11
+  default = "8.0.11"
 }
 
 variable "instance_class" {
