@@ -3,6 +3,7 @@ variable "region" {
 variable "name" {
 }
 variable "eks-cluster-name" {
+  default = "base-eks-cluster"
 }
 
 variable "cidr" {
