@@ -1,8 +1,6 @@
 variable "engine" {
-  default = "mysql"
 }
 variable "instance_class" {
-  default = "db.t3.micro"
 }
 variable "vpc_id" {
 }
