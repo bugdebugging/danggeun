@@ -1,3 +1,16 @@
+variable "region" {}
+variable "eks-cluster-name" {}
+
+variable "vpc_name" {}
+
+variable "rds_name" {}
+variable "engine" {}
+variable "engine_version" {}
+variable "instance_class" {}
+variable "allocated_storage" {}
+variable "db_user" {}
+variable "db_password" {}
+
 module "vpc" {
   source = "./vpc"
   name = var.vpc_name

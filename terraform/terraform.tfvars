@@ -1,3 +1,4 @@
+#reguion
 region = "ap-northeast-2"
 # rds
 rds_name = "danggeun-rds"
