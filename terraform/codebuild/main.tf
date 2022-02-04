@@ -23,72 +23,18 @@ EOF
 resource "aws_iam_role_policy" "codebuild_role_policy-my" {
   policy = <<POLICY
 {
-  "Version": "2012-10-17",
-  "Statement": [
-   {
-      "Effect": "Allow",
-      "Action": [
-        "ec2:CreateNetworkInterface",
-        "ec2:DescribeDhcpOptions",
-        "ec2:DescribeNetworkInterfaces",
-        "ec2:DeleteNetworkInterface",
-        "ec2:DescribeSubnets",
-        "ec2:DescribeSecurityGroups",
-        "ec2:DescribeVpcs"
-        ],
-        "Resource": "*"
-    },
-    {
-      "Sid": "CodeBuildAccessPolicy",
-      "Effect": "Allow",
-      "Action": [
-        "codebuild:*"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "CodeBuildRolePolicy",
-      "Effect": "Allow",
-      "Action": [
-        "iam:PassRole"
-      ],
-      "Resource": "arn:aws:iam::308987748304:role/codebuild_role"
-    },
-    {
-      "Sid": "CloudWatchLogsAccessPolicy",
-      "Effect": "Allow",
-      "Action": [
-        "logs:FilterLogEvents",
-        "logs:GetLogEvents"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "S3AccessPolicy",
-      "Effect": "Allow",
-      "Action": [
-        "s3:CreateBucket",
-        "s3:GetObject",
-        "s3:List*",
-        "s3:PutObject"
-      ],
-      "Resource": "*"
-    },
-    {
-      "Sid": "S3BucketIdentity",
-      "Effect": "Allow",
-      "Action": [
-        "s3:GetBucketAcl",
-        "s3:GetBucketLocation"
-      ],
-      "Resource": "*"
-    }
-  ]
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": "*",
+            "Resource": "*"
+        }
+    ]
 }
   POLICY
   role = aws_iam_role.codebuild_role.id
 }
-
 
 resource "aws_codebuild_project" "danggeun_cicd" {
   name = var.name
