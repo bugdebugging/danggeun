@@ -96,7 +96,7 @@ resource "aws_codebuild_project" "danggeun_cicd" {
 
   vpc_config {
     security_group_ids = var.security_group_ids
-    subnets = var.public_subnet_ids
+    subnets = var.private_subnet_ids
     vpc_id = var.vpc_id
   }
 }

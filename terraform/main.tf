@@ -76,7 +76,7 @@ module "codebuild" {
   name = var.name
   git_location = var.git_location
   vpc_id = module.vpc.vpc_id
-  public_subnet_ids = module.vpc.public_subnet_ids
+  private_subnet_ids = module.vpc.private_subnet_ids
   security_group_ids = [module.vpc.vpc_security_group_id]
   aws_account_id = var.aws_account_id
   image_repo_name = var.name
@@ -84,4 +84,10 @@ module "codebuild" {
   db_url = module.rds.rds_endpoint
   db_user = var.db_user
   db_password = var.db_password
+}
+
+module "bastionHost" {
+  source = "./bastion"
+  public_subnet_id = module.vpc.public_subnet_ids[0]
+  vpc_id = module.vpc.vpc_id
 }

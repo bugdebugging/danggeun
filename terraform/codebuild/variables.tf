@@ -2,7 +2,7 @@ variable "region" {}
 variable "name" {}
 variable "git_location" {}
 variable "vpc_id" {}
-variable "public_subnet_ids" {}
+variable "private_subnet_ids" {}
 variable "security_group_ids" {}
 variable "aws_account_id" {}
 variable "image_repo_name" {}
