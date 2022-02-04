@@ -154,3 +154,19 @@ resource "aws_codebuild_project" "danggeun_cicd" {
     vpc_id = var.vpc_id
   }
 }
+
+resource "aws_codebuild_webhook" "danggeun-codebuild-webhook" {
+  project_name = aws_codebuild_project.danggeun_cicd.name
+  build_type   = "BUILD"
+  filter_group {
+    filter {
+      type    = "EVENT"
+      pattern = "PUSH"
+    }
+
+    filter {
+      type    = "HEAD_REF"
+      pattern = "main"
+    }
+  }
+}
