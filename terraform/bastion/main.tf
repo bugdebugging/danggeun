@@ -17,9 +17,8 @@ resource "aws_security_group" "bastion-security-group" {
   }
 }
 
-resource "aws_key_pair" "bastion-key-pair" {
-  public_key = file("${path.module}/DemoKey.pem")
-  key_name = "bastion-key-pair"
+data "aws_key_pair" "bastion-key-pair"{
+  key_name="DemoKey"
 }
 resource "aws_instance" "bastion_host" {
   ami = "ami-0f66bf23ed74d9284"
@@ -29,5 +28,6 @@ resource "aws_instance" "bastion_host" {
     Name = "bastion host"
   }
   security_groups = [aws_security_group.bastion-security-group.id]
-  key_name = aws_key_pair.bastion-key-pair.key_name
+  key_name = data.aws_key_pair.bastion-key-pair.key_name
 }
+
