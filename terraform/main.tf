@@ -51,9 +51,8 @@ module "s3" {
   source = "./s3"
   name = var.name
 }
-resource "aws_key_pair" "eks-node-key" {
-  public_key = file("${path.module}/eks-node-key.pub")
-  key_name = "eks-node-key"
+data "aws_key_pair" "eks-node-key-pair"{
+  key_name="DemoKey"
 }
 module "eks" {
   source = "./eks"
@@ -62,7 +61,7 @@ module "eks" {
   private_subnet_ids = module.vpc.private_subnet_ids
   public_subnet_ids = module.vpc.public_subnet_ids
 
-  public_key_name = aws_key_pair.eks-node-key.key_name
+  public_key_name = data.aws_key_pair.eks-node-key-pair.key_name
   instance_type = var.instance_class
   min_size = var.min_size
   max_size = var.max_size
