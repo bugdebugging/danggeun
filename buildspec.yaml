@@ -28,4 +28,5 @@ phases:
   post_build:
     commands:
      - echo Start Deploy to Eks on `date`
-     - kubectl apply -f ./k8s/*.yaml
+     - kubectl apply -f k8s/backend-deploy.yaml
+     - kubectl apply -f k8s/backend-service.yaml
