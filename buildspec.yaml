@@ -10,6 +10,8 @@ phases:
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
   build:
     commands:
+      - echo ${ACCESS_KEY}
+      - echo ${SECRET_KEY}
       - echo Build Starting on `date`
       - echo Building with maven ...
       - chmod +x ./mvnw
