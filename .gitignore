@@ -35,3 +35,5 @@ build/
 /src/main/resources/application-aws-local.yaml
 /src/main/resources/application-dev.yaml
 /terraform/bastion/DemoKey.pem
+/k8s/rds-secret.yaml
+/k8s/s3-secret.yaml
