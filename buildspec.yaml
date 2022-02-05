@@ -12,6 +12,7 @@ phases:
     commands:
       - echo Build Starting on `date`
       - echo Building with maven ...
+      - export MAVEN_CONFIG=''
       - chmod +x ./mvnw
       - ./mvnw clean package -e
       - echo Building the Docker image ...
