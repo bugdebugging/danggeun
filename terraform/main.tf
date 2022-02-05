@@ -76,7 +76,7 @@ module "codebuild" {
   git_location = var.git_location
   vpc_id = module.vpc.vpc_id
   private_subnet_ids = module.vpc.private_subnet_ids
-  security_group_ids = [module.vpc.vpc_security_group_id]
+  security_group_ids = [module.vpc.vpc_default_security_group_id]
   aws_account_id = var.aws_account_id
   image_repo_name = var.name
   image_tag = var.image_tag
