@@ -8,6 +8,11 @@ phases:
     commands:
       - echo Logging in to Amazon ECR ...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
+      - curl -o kubectl.sha256 https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl.sha256
+      - chmod +x ./kubectl
+      - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
+      - mkdir ~/.kube
+      - aws eks update-kubeconfig --region $AWS_DEFAULT_REGION --name cluster-name
   build:
     commands:
       - echo Build Starting on `date`
@@ -19,3 +24,7 @@ phases:
       - docker build -t $IMAGE_REPO_NAME:$IMAGE_TAG .
       - docker tag $IMAGE_REPO_NAME:$IMAGE_TAG $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
       - docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+  post_build:
+    commands:
+    - echo Start Deploy to Eks on `date`
+    - kubectl apply -f ./k8s/*.yaml
