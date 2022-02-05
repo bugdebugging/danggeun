@@ -13,7 +13,7 @@ phases:
       - chmod +x ./kubectl
       - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
       - mkdir ~/.kube
-      - aws eks update-kubeconfig --region $AWS_DEFAULT_REGION --name cluster-name
+      - aws eks update-kubeconfig --region $AWS_DEFAULT_REGION --name daggeun-eks-cluster
   build:
     commands:
       - echo Build Starting on `date`
