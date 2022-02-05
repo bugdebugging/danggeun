@@ -19,3 +19,39 @@ spec:
         name: backend
         ports:
         - containerPort: 8080
+      env:
+      - name: DB_URL
+        valueFrom:
+          secretKeyRef:
+            name: rds
+            key: db_url
+      - name: DB_USER
+        valueFrom:
+          secretKeyRef:
+            name: rds
+            key: db_user
+      - name: DB_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: rds
+            key: db_password
+      - name: AWS_DEFAULT_REGION
+        valueFrom:
+          secretKeyRef:
+            name: s3
+            key: default_region
+      - name: AWS_S3_BUCKET
+        valueFrom:
+          secretKeyRef:
+            name: s3
+            key: s3_bucket
+      - name: ACCESS_KEY
+        valueFrom:
+          secretKeyRef:
+            name: s3
+            key: access_key
+      - name: SECRET_KEY
+        valueFrom:
+          secretKeyRef:
+            name: s3
+            key: secret_key
