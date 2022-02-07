@@ -22,5 +22,5 @@ resource "aws_db_instance" "rds_instance" {
   skip_final_snapshot = true
   username = var.db_user
   password = var.db_password
-  security_group_names = [enable_db_security_group]
+  security_group_names = [aws_db_security_group.enable_db_security_group.name]
 }
