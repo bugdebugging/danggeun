@@ -89,5 +89,6 @@ module "codebuild" {
 module "bastionHost" {
   source = "./bastion"
   public_subnet_id = module.vpc.public_subnet_ids[0]
+  vpc_default_security_group_id = module.vpc.vpc_default_security_group_id
   vpc_id = module.vpc.vpc_id
 }

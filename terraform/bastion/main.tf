@@ -27,7 +27,7 @@ resource "aws_instance" "bastion_host" {
   tags = {
     Name = "bastion host"
   }
-  security_groups = [aws_security_group.bastion-security-group.id,var.vpc_default_security_group_id]
+  security_groups = [aws_security_group.bastion-security-group.id]
   key_name = data.aws_key_pair.bastion-key-pair.key_name
 }
 
