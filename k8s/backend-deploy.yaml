@@ -15,7 +15,7 @@ spec:
         app: backend
     spec:
       containers:
-      - image: $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+      - image: AWS_ECR_URI
         name: backend
         ports:
         - containerPort: 8080
