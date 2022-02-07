@@ -36,6 +36,7 @@ module "rds" {
   engine_version = var.engine_version
   instance_class = var.db_instance_class
   vpc_id = module.vpc.vpc_id
+  vpc_cidr = module.vpc.vpc_cidr
   db_subnet_group_ids = module.vpc.private_subnet_ids
   allocated_storage = var.allocated_storage
   db_user = var.db_user
