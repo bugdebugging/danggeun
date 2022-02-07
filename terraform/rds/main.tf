@@ -6,7 +6,6 @@ resource "aws_db_security_group" "enable_db_security_group" {
   name = "db_security_group"
   ingress {
     cidr = var.vpc_cidr
-
   }
 }
 resource "aws_db_instance" "rds_instance" {
