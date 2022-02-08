@@ -9,7 +9,6 @@ phases:
       - echo Logging in to Amazon ECR ...
       - $(aws ecr get-login --no-include-email --region $AWS_DEFAULT_REGION)
       - curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.21.2/2021-07-05/bin/linux/amd64/kubectl
-      - pwd
       - chmod +x ./kubectl
       - mkdir -p $HOME/bin && cp ./kubectl $HOME/bin/kubectl && export PATH=$PATH:$HOME/bin
       - mkdir ~/.kube
@@ -28,6 +27,7 @@ phases:
   post_build:
     commands:
      - AWS_ECR_URI=$AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com/$IMAGE_REPO_NAME:$IMAGE_TAG
+     - sed -i.bak 's#AWS_ECR_URI#'"$AWS_ECR_URI"'#' ./k8s/deployment.yaml
      - echo Start Deploy to Eks on `date`
      - kubectl apply -f k8s/backend-deploy.yaml
      - kubectl apply -f k8s/backend-service.yaml
